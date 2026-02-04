@@ -1,3 +1,7 @@
+// ignore: duplicate_ignore
+// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -22,7 +26,7 @@ class _BookTableState extends State<BookTable> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Café Vesuvius Menu'),
+        title: const Text('Reserver Bord'),
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
