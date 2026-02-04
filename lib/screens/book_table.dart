@@ -26,7 +26,7 @@ class _BookTableState extends State<BookTable> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Reserver Bord'),
+        title: const Text('Reserve table'),
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
         centerTitle: true,
