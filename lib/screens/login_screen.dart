@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import '../styles/app_spacing.dart';
+import '../styles/app_sizes.dart';
+import '../styles/app_text_styles.dart';
+import '../styles/app_decorations.dart';
+import '../services/theme_service.dart';
 import 'book_table.dart';
 
 // Stateful widget for the Login screen.
@@ -20,44 +25,38 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final themeService = ThemeService();
+
     return Scaffold(
       appBar: AppBar(
-        // Title of the AppBar.
-        title: Text('Login'),
-
-        // Background color of the AppBar.
-        backgroundColor: Colors.green,
-
-        // Text color of the AppBar.
-        foregroundColor: Colors.white,
-
-        // Centers the title in the AppBar.
+        title: const Text('Login'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(
+              themeService.isDarkMode() ? Icons.light_mode : Icons.dark_mode,
+            ),
+            onPressed: () {
+              themeService.toggleTheme();
+            },
+          ),
+        ],
       ),
-
-      // Allows scrolling for smaller screens.
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             // Logo section at the top.
             Padding(
-              padding: const EdgeInsets.only(top: 30.0),
+              padding: EdgeInsets.only(top: AppSpacing.lg),
               child: Center(
                 child: Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    // Rounded corners.
-                    borderRadius: BorderRadius.circular(40),
-
-                    // Border styling.
-                    border: Border.all(color: Colors.blueGrey),
-                  ),
+                  width: AppSizes.logoSize,
+                  height: AppSizes.logoSize,
+                  decoration: AppDecorations.logoBox,
                   child: Image.asset(
-                    // Path to the logo image.
-                    'assets/logo.jpg',
-                    height: 30,
-                    width: 20,
+                    'lib/assets/logo.jpg',
+                    height: AppSizes.logoImageHeight,
+                    width: AppSizes.logoImageWidth,
                   ),
                 ),
               ),
@@ -65,18 +64,17 @@ class _LoginState extends State<Login> {
 
             // Form section for user input.
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: EdgeInsets.all(AppSpacing.sm),
                 child: Form(
-                  // Associates the form with the key.
                   key: _formkey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       // Email input field.
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(AppSpacing.sm),
                         child: TextFormField(
                           validator: MultiValidator([
                             RequiredValidator(errorText: 'Enter email address'),
@@ -84,33 +82,13 @@ class _LoginState extends State<Login> {
                               errorText: 'Please correct email filled',
                             ),
                           ]).call,
-                          decoration: InputDecoration(
-                            // Placeholder text.
-                            hintText: 'Email',
-
-                            // Label for the field.
-                            labelText: 'Email',
-                            prefixIcon: Icon(
-                              // Email icon.
-                              Icons.email,
-                            ),
-
-                            // Error message styling.
-                            errorStyle: TextStyle(fontSize: 18.0),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
-                              borderRadius: BorderRadius.all(
-                                // Rounded border.
-                                Radius.circular(9.0),
-                              ),
-                            ),
-                          ),
+                          decoration: AppDecorations.emailInput,
                         ),
                       ),
 
                       // Password input field.
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(AppSpacing.sm),
                         child: TextFormField(
                           validator: MultiValidator([
                             RequiredValidator(
@@ -127,74 +105,41 @@ class _LoginState extends State<Login> {
                                   'Psw must have at least one special character',
                             ),
                           ]).call,
-                          decoration: InputDecoration(
-                            // Placeholder text.
-                            hintText: 'Password',
-
-                            // Label for the field.
-                            labelText: 'Password',
-                            prefixIcon: Icon(
-                              // Key icon for password.
-                              Icons.key,
-                              color: Colors.green,
-                            ),
-
-                            // Error message styling.
-                            errorStyle: TextStyle(fontSize: 18.0),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.red),
-
-                              // Rounded border.
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(9.0),
-                              ),
-                            ),
-                          ),
+                          decoration: AppDecorations.passwordInput,
                         ),
                       ),
 
                       // Forget password text.
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(200, 0, 0, 0),
-                        child: Text('Forgot Password!'),
+                        padding: EdgeInsets.fromLTRB(AppSpacing.xl, 0, 0, 0),
+                        child: Text(
+                          'Forgot Password!',
+                          style: AppTextStyles.bodySmall,
+                        ),
                       ),
 
                       // Login button.
                       Padding(
-                        padding: const EdgeInsets.all(28.0),
+                        padding: EdgeInsets.all(AppSpacing.lg),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: 50,
+                          height: AppSizes.buttonHeight,
                           child: ElevatedButton(
                             onPressed: () {
                               // Login button does nothing for now
                             },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              foregroundColor: Colors.white,
-                            ),
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                              ),
-                            ),
+                            child: const Text('Login', style: AppTextStyles.h3),
                           ),
                         ),
                       ),
 
-                      // Divider text for alternative sign-in options.
+                      // Sign up text.
                       Center(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 50),
+                          padding: EdgeInsets.only(top: AppSpacing.xl),
                           child: Text(
                             'SIGN UP!',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.lightBlue,
-                            ),
+                            style: AppTextStyles.signUpText,
                           ),
                         ),
                       ),
@@ -209,7 +154,6 @@ class _LoginState extends State<Login> {
 
       // Floating Action Button to navigate to menu
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
         onPressed: () {
           Navigator.push(
             context,
