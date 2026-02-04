@@ -2,6 +2,8 @@
 // ignore: file_names
 // ignore_for_file: file_names
 
+//Test screen for WebView to book a table
+
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
