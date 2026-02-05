@@ -1,39 +1,62 @@
-// ignore: duplicate_ignore
 // ignore: file_names
-// ignore_for_file: file_names
-
-//Test screen for WebView to book a table
+// ignore: file_names
+// ignore_for_file: camel_case_types, duplicate_ignore, file_names, use_super_parameters
 
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class BookTable extends StatefulWidget {
-  const BookTable({super.key});
+// ignore: camel_case_types
+class book_Table extends StatefulWidget {
+  const book_Table({Key? key}) : super(key: key);
 
   @override
-  State<BookTable> createState() => _BookTableState();
+  State<book_Table> createState() => _book_TableState();
 }
 
-class _BookTableState extends State<BookTable> {
-  late WebViewController _webViewController;
+class _book_TableState extends State<book_Table> {
+  late final WebViewController _controller;
 
   @override
   void initState() {
     super.initState();
-    _webViewController = WebViewController()
-      ..loadFlutterAsset('assets/index.html');
+    // The newer WebViewController/WebViewWidget APIs don't require setting
+    // WebView.platform on recent plugin versions. Remove platform assignment
+    // to avoid missing-symbol errors in different package versions.
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..addJavaScriptChannel(
+        'Flutter',
+        onMessageReceived: (JavaScriptMessage message) {
+          final payload = message.message;
+          debugPrint('JS -> Flutter: $payload');
+          // parse JSON og håndter action (fx reservér bord)
+        },
+      )
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onPageFinished: (url) {
+            // Sæt eventuelt initial state eller kald JS-funktion
+          },
+        ),
+      )
+      ..loadFlutterAsset('lib/assets/tableBooking.html');
+  }
+
+  Future<void> sendToWeb(String jsonString) async {
+    await _controller.runJavaScript("fromFlutter($jsonString);");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Reserve table'),
-        backgroundColor: Colors.green,
-        foregroundColor: Colors.white,
-        centerTitle: true,
+      appBar: AppBar(title: Text('Book bord')),
+      body: WebViewWidget(controller: _controller),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          sendToWeb("'Hello from Flutter'");
+        },
+        child: Icon(Icons.send),
       ),
-      body: WebViewWidget(controller: _webViewController),
     );
   }
 }

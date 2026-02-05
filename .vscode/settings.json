@@ -1,3 +1,19 @@
 {
-  "dart.flutterSdkPath": "/opt/homebrew/share/flutter"
+  "dart.flutterSdkPath": "/opt/homebrew/share/flutter",
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "127.0.0.1",
+      "port": 3307,
+      "driver": "MySQL",
+      "name": "cafe db via ssh",
+      "database": "cafevesuvius",
+      "username": "sa"
+    }
+  ]
 }
