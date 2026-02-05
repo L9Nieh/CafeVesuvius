@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bordbestilling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .selection-section {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .selection-section h3 {
+            margin-top: 0;
+            color: #555;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        
+        .tables-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .table-item {
+            padding: 12px 5px;
+            border: 2px solid #ddd;
+            text-align: center;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            background-color: white;
+        }
+        
+        .table-item:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .table-item.selected {
+            border-color: #4CAF50;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .info-text {
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .tables-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bestil Bord</h1>
+        
+        <div class="info-text">
+            Alle vores borde er til 2 personer. Vælg et tidspunkt og et bord.
+        </div>
+        
+        <form action="#" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Fulde navn:</label>
+                    <input type="text" id="name" name="name" required placeholder="Indtast dit fulde navn">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Telefon:</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+45 12 34 56 78">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date">Dato:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="time">Tidspunkt:</label>
+                    <select id="time" name="time" required>
+                        <option value="">Vælg tidspunkt</option>
+                        <option value="12:00">12:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="14:00">14:00</option>
+                        <option value="15:00">15:00</option>
+                        <option value="16:00">16:00</option>
+                        <option value="17:00">17:00</option>
+                        <option value="18:00">18:00</option>
+                        <option value="19:00">19:00</option>
+                        <option value="20:00">20:00</option>
+                        <option value="21:00">21:00</option>
+                        <option value="22:00">22:00</option>
+                        <option value="23:00">23:00</option>
+                        <option value="00:00">00:00 (midnat)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="selection-section">
+                <h3>Vælg bord (28 borde til 2 personer)</h3>
+                <div class="tables-grid">
+                    <div class="table-item">Bord 1<br>2 pers</div>
+                    <div class="table-item">Bord 2<br>2 pers</div>
+                    <div class="table-item">Bord 3<br>2 pers</div>
+                    <div class="table-item">Bord 4<br>2 pers</div>
+                    <div class="table-item">Bord 5<br>2 pers</div>
+                    <div class="table-item">Bord 6<br>2 pers</div>
+                    <div class="table-item">Bord 7<br>2 pers</div>
+                    
+                    <div class="table-item">Bord 8<br>2 pers</div>
+                    <div class="table-item">Bord 9<br>2 pers</div>
+                    <div class="table-item">Bord 10<br>2 pers</div>
+                    <div class="table-item">Bord 11<br>2 pers</div>
+                    <div class="table-item">Bord 12<br>2 pers</div>
+                    <div class="table-item">Bord 13<br>2 pers</div>
+                    <div class="table-item">Bord 14<br>2 pers</div>
+                    
+                    <div class="table-item">Bord 15<br>2 pers</div>
+                    <div class="table-item">Bord 16<br>2 pers</div>
+                    <div class="table-item">Bord 17<br>2 pers</div>
+                    <div class="table-item">Bord 18<br>2 pers</div>
+                    <div class="table-item">Bord 19<br>2 pers</div>
+                    <div class="table-item">Bord 20<br>2 pers</div>
+                    <div class="table-item">Bord 21<br>2 pers</div>
+                    
+                    <div class="table-item">Bord 22<br>2 pers</div>
+                    <div class="table-item">Bord 23<br>2 pers</div>
+                    <div class="table-item">Bord 24<br>2 pers</div>
+                    <div class="table-item">Bord 25<br>2 pers</div>
+                    <div class="table-item">Bord 26<br>2 pers</div>
+                    <div class="table-item">Bord 27<br>2 pers</div>
+                    <div class="table-item">Bord 28<br>2 pers</div>
+                </div>
+                <input type="hidden" id="selectedTable" name="selectedTable" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="notes">Bemærkninger (valgfrit):</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Allergier, fødselsdag eller andet..."></textarea>
+            </div>
+            
+            <button type="submit">Bekræft bordbestilling</button>
+        </form>
+    </div>
+</body>
+</html>
