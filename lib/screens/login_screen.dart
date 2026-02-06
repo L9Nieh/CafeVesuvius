@@ -1,3 +1,4 @@
+import 'package:cafe_app/screens/user_signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../styles/app_spacing.dart';
@@ -6,6 +7,9 @@ import '../styles/app_text_styles.dart';
 import '../styles/app_decorations.dart';
 import '../services/theme_service.dart';
 import 'book_table.dart';
+import 'user_screen.dart';
+
+bool _obscurePassword = true;
 
 // Stateful widget for the Login screen.
 class Login extends StatefulWidget {
@@ -105,7 +109,21 @@ class _LoginState extends State<Login> {
                                   'Psw must have at least one special character',
                             ),
                           ]).call,
-                          decoration: AppDecorations.passwordInput,
+                          obscureText: _obscurePassword,
+                          decoration: AppDecorations.passwordInput.copyWith(
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _obscurePassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
+                            ),
+                          ),
                         ),
                       ),
 
@@ -126,7 +144,14 @@ class _LoginState extends State<Login> {
                           height: AppSizes.buttonHeight,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Login button does nothing for now
+                              if (_formkey.currentState?.validate() ?? false) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const UserScreen(),
+                                  ),
+                                );
+                              }
                             },
                             child: const Text('Login', style: AppTextStyles.h3),
                           ),
@@ -137,9 +162,20 @@ class _LoginState extends State<Login> {
                       Center(
                         child: Padding(
                           padding: EdgeInsets.only(top: AppSpacing.xl),
-                          child: Text(
-                            'SIGN UP!',
-                            style: AppTextStyles.signUpText,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const UserSignupScreen(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'SIGN UP!',
+                              style: AppTextStyles.signUpText,
+                            ),
                           ),
                         ),
                       ),
